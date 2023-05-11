@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/petCare/static/css/main.4ec85868.css",
+    "main.js": "/petCare/static/js/main.63ef917f.js",
+    "static/js/787.cda612ba.chunk.js": "/petCare/static/js/787.cda612ba.chunk.js",
+    "static/media/movingdog.gif": "/petCare/static/media/movingdog.9bafa364759c37cf0aab.gif",
+    "static/media/map.jpg": "/petCare/static/media/map.24c0c175c0308ff8fed8.jpg",
+    "static/media/slider1.jpg": "/petCare/static/media/slider1.80dba3e7a36bb51196cc.jpg",
+    "static/media/slider3.jpg": "/petCare/static/media/slider3.202b9f4d0d87050b34ab.jpg",
+    "static/media/slider2.jpg": "/petCare/static/media/slider2.8fba6fe16e520a779828.jpg",
+    "static/media/petFood.jpeg": "/petCare/static/media/petFood.745dd901764586e14f72.jpeg",
+    "static/media/petProduct.jpg": "/petCare/static/media/petProduct.f3e3d47312549aef1d68.jpg",
+    "static/media/petService.jpg": "/petCare/static/media/petService.c176c04e41e8f2b66131.jpg",
+    "static/media/logo.png": "/petCare/static/media/logo.8cf3cc44e0a0157e5a6a.png",
+    "static/media/dogcare.jpg": "/petCare/static/media/dogcare.ba6ab9365b7cbe9fdf54.jpg",
+    "static/media/priceservice.jpg": "/petCare/static/media/priceservice.26b92f4940b85ee7c19e.jpg",
+    "static/media/publicplace.jpg": "/petCare/static/media/publicplace.b8c3366824eef71e63a5.jpg",
+    "static/media/wishlist.png": "/petCare/static/media/wishlist.43438ee3546771460d96.png",
+    "index.html": "/petCare/index.html",
+    "main.4ec85868.css.map": "/petCare/static/css/main.4ec85868.css.map",
+    "main.63ef917f.js.map": "/petCare/static/js/main.63ef917f.js.map",
+    "787.cda612ba.chunk.js.map": "/petCare/static/js/787.cda612ba.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4ec85868.css",
+    "static/js/main.63ef917f.js"
+  ]
+}
