@@ -1,5 +1,8 @@
-import { createContext, useState } from "react";
+import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { ReactNotifications, Store } from 'react-notifications-component'
+import 'react-notifications-component/dist/theme.css'
+import CartContext from "./store/cartContext";
 
 import Home from "./pages/home";
 import ErrorPage from "./pages/error";
@@ -26,29 +29,59 @@ import AdminProduct from "./pages/adminProduct";
 import AdminAccount from "./pages/adminAccount";
 import AdminOrder from "./pages/adminOrder";
 
-export const CartContext = createContext()
-
 function App() {
-  const [cart, setcart] = useState([])
+  const [cart, setcart] = useState(() => {
+    const globalCart = localStorage.getItem('globalCart');
+    return globalCart !== null ? JSON.parse(globalCart) : [];
+  })
+
+  useEffect(() => {
+    localStorage.setItem('globalCart', JSON.stringify(cart));
+  },[cart])
 
   const dltItem = (item) => {
-    let mycart = cart.filter((x) => x.name === item.name)
+    let mycart = cart.filter((x) => x.name !== item.name)
     setcart(mycart)
   }
 
   const handleAdd = (product, id, type, quantity) => {
-    let mycart = cart
-    mycart.push({
+    if (!quantity) {
+      Store.addNotification({
+        title: "Thêm sản phẩm lỗi",
+        message: "Thêm số lượng sản phẩm",
+        type: 'danger',
+        insert: "top",
+        container: "top-right",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        dismiss: {
+            duration: 3000,
+            onScreen: true
+        }
+      });
+    }
+    else {
+      let mycart = cart
+      for (let item of mycart) {
+        if (item.id === id && item.name === product.name) {
+          item.quantitySell = (+item.quantitySell + +quantity).toString()
+          setcart(mycart)
+          return
+        }
+      }
+      mycart.push({
         ...product,
         id: id,
         type: type,
         quantitySell: quantity
-    })
-    setcart(mycart)
+      })
+      setcart(mycart)
+    }
   }
 
   return (
-    <CartContext.Provider value={{ cart, handleAdd, dltItem }}>
+    <CartContext.Provider value={{ cart, setcart, handleAdd, dltItem }}>
+      <ReactNotifications/>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />}></Route>

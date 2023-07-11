@@ -1,4 +1,4 @@
-import {useEffect,useState} from 'react'
+import {useContext, useEffect,useState} from 'react'
 import Footer from '../components/footer';
 import Header from '../components/header';
 import AvatarInput from '../components/avatarInput';
@@ -6,6 +6,7 @@ import Input from '../components/input';
 
 import {userInfo,userAvatar} from '../api/userApi'
 import Hotline from '../components/hotline';
+import CartContext from '../store/cartContext';
 
 const description = {
     fullname_des : "Tên của bạn xuất hiện trên trang cá nhân và bên cạnh các bình luận của bạn.",
@@ -17,6 +18,7 @@ const description = {
 const Profile = () => {
     const [info, setInfo] = useState({});
     const [avatar, setAvatar] = useState();
+    const { cart } = useContext(CartContext)
 
     useEffect(() => {
         (async () => {
@@ -32,7 +34,7 @@ const Profile = () => {
 
     return (
         <>
-            <Header/>
+            <Header cartLen={cart.length}/>
             <div className="lg:pl-80 pl-12 pt-20">
                 <p className="text-2xl font-bold text-primary_color font-primary">Cài đặt</p>
                 <div className="flex flex-col gap-4 pt-4 divide-solid divide-y divide-slate-200 lg:w-3/5">

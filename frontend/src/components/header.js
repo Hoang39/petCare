@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Pagination, Autoplay } from "swiper";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -14,7 +14,6 @@ import logo from '../img/logo.png'
 import slider1 from '../img/slider1.jpg'
 import slider2 from '../img/slider2.jpg'
 import slider3 from '../img/slider3.jpg'
-import { CartContext } from '../App';
 
 const NavBarList = [
     {
@@ -43,23 +42,17 @@ const NavBarList = [
     }
 ]
 
-const Header = () => {
+const Header = ({ cartLen }) => {
     SwiperCore.use([Autoplay])
     const navigate = useNavigate()
     const [token, setToken] = useState(null)
     const [info, setInfo] = useState(null)
     const [avatar, setAvatar] = useState(null)
     const [keySearch, setkeySearch] = useState('')
-    const reloadCount = useRef(0);
-    const {cart} = useContext(CartContext)
 
     const handleChange = (event) => {
         setkeySearch(event.target.value)
     }
-
-    useEffect(() => {
-        reloadCount.current++;
-    }, []);
 
     useEffect(() => {
         (async () => {
@@ -71,11 +64,11 @@ const Header = () => {
                 setAvatar(ava.avatar)
             }
         })()
-    },[reloadCount.current])
+    },[token])
 
     return (
         <div className="flex flex-row border-b-2 border-primary_color pb-6">
-            <div className="w-1/3 flex flex-col items-center mt-6">
+            <div className="hidden w-1/3 sm:flex flex-col items-center mt-6">
                 {token
                     ?
                     <Popover className='relative'>
@@ -137,7 +130,7 @@ const Header = () => {
                                         </NavLink>
                                         <div
                                             className='cursor-pointer font-semibold text-sm tracking-tighter px-3 py-2 bg-white hover:text-primary_color duration-300 border-2 rounded-b-lg'
-                                            onClick={() => {localStorage.removeItem('user'); window.location.reload(true); navigate('/')}}
+                                            onClick={() => {localStorage.removeItem('user'); navigate('/')}}
                                         >
                                             Đăng xuất
                                         </div>
@@ -212,10 +205,10 @@ const Header = () => {
                             to={token? '/cart': '/signIn'}
                             className='flex flex-row rounded-xl items-center gap-x-2 bg-primary_color py-1 px-2 border-2 border-dashed'
                         >
-                            <svg style={{color: "white"}} xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cart-fill" viewBox="0 0 16 16"> <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" fill="white"></path> </svg>
+                            <svg style={{color: "white"}} xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"> <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" fill="white"></path> </svg>
                             <div>
                                 <p className='font-bold text-white leading-tight'>Giỏ hàng</p>
-                                <p className='text-white leading-tight'>{cart.length} sản phẩm</p>
+                                <p className='text-white leading-tight'>{cartLen} sản phẩm</p>
                             </div>
 
                         </NavLink>
@@ -238,7 +231,7 @@ const Header = () => {
                 {/* search */}
                 <div className='flex flex-row-reverse items-center mr-44'>
                     <div onClick={() => navigate(`search/${keySearch}`)} className='cursor-pointer bg-[#333] py-3 px-3 border-2 border-[#333] rounded'>
-                        <svg style={{color: 'white'}} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16"> <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" fill="white"></path> </svg>
+                        <svg style={{color: 'white'}} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"> <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" fill="white"></path> </svg>
                     </div>
                     <input onChange={handleChange} type="text" name='search' placeholder='Tìm kiếm...' className='border-t-2 border-b-2 border-l-2 rounded-l py-2 px-3 w-1/2'/>
                 </div>
@@ -247,4 +240,4 @@ const Header = () => {
     )
 }
 
-export default Header
+export default memo(Header)

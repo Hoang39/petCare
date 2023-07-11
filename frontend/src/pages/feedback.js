@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react"
+import { useContext, useEffect, useRef, useState } from "react"
 import { ReactNotifications, Store } from 'react-notifications-component'
 import 'react-notifications-component/dist/theme.css'
 
@@ -6,11 +6,13 @@ import Footer from "../components/footer"
 import Header from "../components/header"
 import Hotline from "../components/hotline"
 import { userFeedback, postFeedback } from "../api/userApi"
+import CartContext from "../store/cartContext"
 
 const FeedBack = () => {
     const [feedback, setFeedBack] = useState('')
     const [allfeedback, setAllFeedBack] = useState('')
     const [state, setState] = useState(true)
+    const { cart } = useContext(CartContext)
 
     const handleChange = (event) => {
         setFeedBack(event.target.value)
@@ -52,7 +54,7 @@ const FeedBack = () => {
         <>
             <ReactNotifications/>
 
-            <Header />
+            <Header cartLen={cart.length}/>
 
             <div className="my-8 mx-20 flex flex-col items-center">
                 <p className="font-primary text-primary_color text-2xl font-bold">PHẢN HỒI</p>

@@ -102,8 +102,8 @@ export const userOrder = async(token) => {
   }
 }
 
-export const createOrder = async(token,order,payment) => {
-  if( !token || !order || !order.length )
+export const createOrder = async(token,newCart,payment) => {
+  if( !token || !newCart || !newCart.length )
     return;
     
   try {
@@ -111,7 +111,7 @@ export const createOrder = async(token,order,payment) => {
       method: "post",
       url: "http://localhost:8000/controllers/orderController.php",
       data: {
-        order:JSON.stringify(order),
+        order:toString(JSON.stringify(newCart)),
         paymentMethod:payment
       },
       headers: { Authorization: `Bearer ${token}`,

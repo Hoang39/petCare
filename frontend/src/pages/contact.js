@@ -4,14 +4,18 @@ import Hotline from "../components/hotline"
 
 import ggmap from '../img/map.jpg'
 import dogcare from '../img/dogcare.jpg'
+import { useContext } from "react"
+import CartContext from "../store/cartContext"
 
 const Contact = () => {
+    const { cart } = useContext(CartContext)
+
     return (
         <>
-            <Header />
+            <Header cartLen={cart.length}/>
             <div className="my-8 mx-20">
                 <div className="flex flex-row rounded bg-[#ededed] items-center px-4">
-                    <a href="/#" className="text-[#333] px-3 my-2 border-r-2 hover:text-primary_color duration-300">Trang chủ</a>
+                    <div className="cursor-pointer text-[#333] px-3 my-2 border-r-2 hover:text-primary_color duration-300">Trang chủ</div>
                     <p className="text-[#333] px-3">Liên hệ</p>
                 </div>
 
@@ -59,30 +63,30 @@ const Contact = () => {
  
                     <div className="my-8 flex flex-row items-center gap-x-8">
                         <div className="space-y-6">
-                        <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-                            <div class="mb-4">
-                                <label class="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
+                        <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                            <div className="mb-4">
+                                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
                                     Name
                                 </label>
-                                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" placeholder="Name"/>
+                                <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" placeholder="Name"/>
                             </div>
-                            <div class="mb-4">
-                                <label class="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+                            <div className="mb-4">
+                                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
                                     Email
                                 </label>
-                                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="Email"/>
+                                <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="Email"/>
                             </div>
-                            <div class="mb-4">
-                                <label class="block text-gray-700 text-sm font-bold mb-2" for="message">
+                            <div className="mb-4">
+                                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="message">
                                     Message
                                 </label>
-                                <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" rows="4" cols="50" id="message" type="email" placeholder="Message"></textarea>
+                                <textarea className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" rows="4" cols="50" id="message" type="email" placeholder="Message"></textarea>
                             </div>
                             
-                            <div class="flex items-center justify-between">
-                                <a href="/#" className="flex flex-row items-center rounded-lg bg-primary_color hover:bg-hover_primary_color py-2 px-4 border-2 border-dashed transition focus:outline-none focus:shadow-outline">
+                            <div className="flex items-center justify-between">
+                                <div className="cursor-pointer flex flex-row items-center rounded-lg bg-primary_color hover:bg-hover_primary_color py-2 px-4 border-2 border-dashed transition focus:outline-none focus:shadow-outline">
                                     <p className="text-white font-medium pr-1">POST COMMENT</p>
-                                </a>
+                                </div>
                             </div>
                         </form>
                             

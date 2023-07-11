@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 
 import Footer from "../components/footer"
 import Header from "../components/header"
@@ -7,10 +7,12 @@ import { userOrder } from "../api/userApi"
 import { useNavigate } from "react-router-dom"
 
 import wishlist from '../img/wishlist.png'
+import CartContext from "../store/cartContext"
 
 const Order = () => {
     const navigate = useNavigate()
     const [order, setOrder] = useState([])
+    const { cart } = useContext(CartContext)
 
     useEffect(() => {
         (async () => {
@@ -22,7 +24,7 @@ const Order = () => {
 
     return (
         <>
-            <Header />
+            <Header cartLen={cart.length}/>
             {
                 order && order.length
                 ?

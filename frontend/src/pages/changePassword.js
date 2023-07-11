@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { ReactNotifications, Store } from 'react-notifications-component'
 import 'react-notifications-component/dist/theme.css'
 
@@ -6,11 +6,13 @@ import Footer from "../components/footer"
 import Header from "../components/header"
 import Hotline from "../components/hotline"
 import { changePassword } from "../api/userApi"
+import CartContext from "../store/cartContext"
 
 
 const ChangePassword = () => {
     const [pass, setPass] = useState('')
     const [state, setState] = useState(true)
+    const { cart } = useContext(CartContext)
 
     const handleChange = (event) => {
         setPass(event.target.value)
@@ -43,7 +45,7 @@ const ChangePassword = () => {
         <>
             <ReactNotifications/>
 
-            <Header />
+            <Header cartLen={cart.length}/>
 
             <div className="my-8 mx-20 flex flex-col items-center">
                 <p className="font-primary text-primary_color text-2xl font-bold">ĐỔI MẬT KHẨU</p>

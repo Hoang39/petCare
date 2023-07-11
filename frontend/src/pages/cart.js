@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom"
 import { createOrder } from "../api/userApi"
 
 import wishlist from '../img/wishlist.png'
-import { CartContext } from "../App"
+import CartContext from "../store/cartContext"
 
 const Cart = () => {
     const navigate = useNavigate()
@@ -21,7 +21,7 @@ const Cart = () => {
         const newCart = cart.map((item) => ({
             id: item.id,
             type: item.type,
-            quantity: item.quantitySell
+            quantity: parseInt(item.quantitySell)
         }))
         const token = localStorage.getItem('user')
         const res = await createOrder(token, newCart, payment)
@@ -33,7 +33,7 @@ const Cart = () => {
 
     return (
         <>
-            <Header />
+            <Header cartLen={cart.length}/>
             {
                 cart && cart.length
                 ?
@@ -41,8 +41,8 @@ const Cart = () => {
                     <p className="font-primary text-primary_color text-2xl font-bold">GIỎ HÀNG</p>
                     <div className="overflow-y-auto h-160 flex flex-col gap-4 gap-y-6 mt-8">
                         {
-                            cart && cart.map((item)=>(
-                                <div key={item.orderID} className="flex flex-row justify-between border-b-2 border-gray-100 pt-8">
+                            cart && cart.map((item, index)=>(
+                                <div key={index} className="flex flex-row justify-between border-b-2 border-gray-100 pt-8">
                                     <div className="flex flex-row gap-x-2 items-center">
                                         <svg onClick={() => { dltItem(item); setLoad(!load) }} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="cursor-pointer w-6 h-6">
                                             <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
