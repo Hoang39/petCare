@@ -41,11 +41,11 @@ const Home = () => {
                 {/* product */}
                 <div className="my-16 flex flex-col items-center">
                     <p className="font-primary text-primary_color text-3xl font-bold">THÚ CƯNG</p>
-                    <div className="flex flex-row flex-wrap justify-between mt-8">
+                    <div className="flex flex-row items-center flex-wrap justify-between mt-8 space-y-4">
                         {pets.map((item) => (
                             <div
                                 key={item.id}
-                                className="w-[22%] space-y-2"
+                                className="w-full sm:w-[45%] lg:w-[22%] space-y-1"
                             >
                                 <div onClick={() => navigate(`/pet/${item.id}`)} className="cursor-pointer h-3/4 group overflow-hidden relative">
                                     <div className="invisible group-hover:visible absolute w-full h-full flex flex-col items-center justify-center bg-white/50 z-30">
@@ -65,22 +65,22 @@ const Home = () => {
                                         </div>
                                     </div>
 
-                                    <img src={item.imageUrl} alt={item.name} className="h-full group-hover:scale-110 group-hover:blur-sm duration-300"></img>
-                                </div>
-                                <p className="text-primary_color text-sm font-medium">ID: {item.petID}</p>
+                                    <img src={item.imageUrl} alt={item.name} className="h-full group-hover:scale-110 group-hover:blur-sm duration-300 rounded-xl"></img>
+                                </div>  
+                                <p className="text-primary_color text-sm font-medium">ID: {item.id}</p>
                                 <p className="truncate text-[#333] font-primary font-bold text-lg hover:text-primary_color duration-300">{item.name}</p>
                                 <p className="text-primary_color text-lg font-medium">{item.unitPrice}đ</p>
                             </div>
                         ))}
                     </div>
-                    <Link to="/pet" className="self-end flex flex-row items-center rounded-lg bg-primary_color hover:bg-hover_primary_color py-1 px-3 mt-6 border-2 border-dashed">
+                    <Link to="/pet" className="w-full lg:w-36 self-end flex flex-row items-center justify-between rounded-lg bg-primary_color hover:bg-hover_primary_color py-1 px-32 sm:px-3 mt-6 border-2 border-dashed">
                         <p className="text-white font-medium pr-2">Xem thêm</p>
                         <svg style={{color: 'white'}} xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16"> <path fillRule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" fill="white"></path> </svg>
                     </Link>
                 </div>
 
                 {/* service */}
-                <div className="my-16 flex flex-col items-center">
+                <div className="mb-16 mt-28 flex flex-col items-center">
                     <p className="font-primary text-primary_color text-3xl font-bold">SẢN PHẨM</p>
                     <div className="flex flex-col sm:flex-row justify-between mt-8 gap-x-16">
                         <Link to='/petFood' className="group flex flex-col items-center sm:w-[33%]">
@@ -107,7 +107,7 @@ const Home = () => {
                         <p className="text-[#333] text-4xl sm:text-6xl font-medium font-primary text-center">Get Access To</p>
                         <p className="text-primary_color text-xl sm:text-3xl font-bold font-primary text-center">PUBLIC PLACES WITH YOUR PET!</p>
                         <p className="text-[#333] text-justify sm:mx-8 lg:mx-0">Register today and join the largest Emotional Support Animal database in the country. We will update you anytime the Federal Laws change, as well as other pertinent info related to your Emotional Support Animal.</p>
-                        <div className="cursor-pointer flex flex-col items-center w-full lg:w-2/3 py-4 rounded-lg bg-primary_color hover:bg-hover_primary_color border-2 border-dashed mx-auto lg:m-0">
+                        <div className="cursor-pointer flex flex-col items-center w-full py-4 rounded-lg bg-primary_color hover:bg-hover_primary_color border-2 border-dashed mx-auto lg:m-0">
                             <img src={minidog} alt='dog'></img>
                             <p className="text-white font-bold text-2xl">Register for Free!</p>
                         </div>
@@ -129,7 +129,7 @@ const Home = () => {
                 </div>
 
                 {/* price service */}
-                <div className="sm:mb-40 my-40 sm:flex items-center gap-x-6">
+                <div className="sm:mb-40 my-40 sm:flex justify-between items-center gap-x-6">
                     <div className="sm:hidden flex flex-row items-center justify-between">
                         <p className="text-primary_color text-4xl font-medium font-primary my-8 mx-auto">Price Services</p>
                     </div>
