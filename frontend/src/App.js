@@ -30,6 +30,7 @@ import AdminAccount from "./pages/adminAccount";
 import AdminOrder from "./pages/adminOrder";
 
 function App() {
+  const [load, setLoad] = useState(true)
   const [cart, setcart] = useState(() => {
     const globalCart = localStorage.getItem('globalCart');
     return globalCart !== null ? JSON.parse(globalCart) : [];
@@ -37,10 +38,10 @@ function App() {
 
   useEffect(() => {
     localStorage.setItem('globalCart', JSON.stringify(cart));
-  },[cart])
+  },[cart, load])
 
   const dltItem = (item) => {
-    let mycart = cart.filter((x) => x.name !== item.name)
+    let mycart = cart.filter(x => x.name !== item.name)
     setcart(mycart)
   }
 
@@ -66,6 +67,7 @@ function App() {
         if (item.id === id && item.name === product.name) {
           item.quantitySell = (+item.quantitySell + +quantity).toString()
           setcart(mycart)
+          setLoad(!load)
           return
         }
       }
@@ -75,7 +77,9 @@ function App() {
         type: type,
         quantitySell: quantity
       })
+      
       setcart(mycart)
+      setLoad(!load)
     }
   }
 

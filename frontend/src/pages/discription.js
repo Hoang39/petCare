@@ -10,6 +10,7 @@ import CartContext from "../store/cartContext";
 const Discription = ( props ) => {
     const params = useParams();
     const href = props.href
+    const [load, setLoad] = useState(true)
     const { cart, handleAdd } = useContext(CartContext)
     const [product, setProduct] = useState([])
     const [allproduct, setAllProduct] = useState([])
@@ -52,7 +53,7 @@ const Discription = ( props ) => {
                                         <label className="text-[#333] font-medium" htmlFor="quantity">Số lượng:</label>
                                         <input onChange={handleQuantity} className="border-2 rounded-l py-1 px-3" type="number" id="quantity" name="quantity" min="1" max="100" placeholder="0"/>
                                         
-                                        <div onClick={() => handleAdd(product, parseInt(params.id), href, quantity)} className="cursor-pointer self-end flex flex-row items-center rounded-lg bg-primary_color hover:bg-hover_primary_color py-1 px-3 border-2 border-dashed">
+                                        <div onClick={() => {handleAdd(product, parseInt(params.id), href, quantity); setLoad(!load)}} className="cursor-pointer self-end flex flex-row items-center rounded-lg bg-primary_color hover:bg-hover_primary_color py-1 px-3 border-2 border-dashed">
                                             <p className="text-white font-medium pr-2">Mua hàng</p>
                                             <svg style={{color: 'white'}} xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16"> <path fillRule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" fill="white"></path> </svg>
                                         </div>
